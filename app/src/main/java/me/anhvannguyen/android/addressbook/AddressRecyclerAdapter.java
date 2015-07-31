@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import me.anhvannguyen.android.addressbook.data.AddressContract;
+
 /**
  * Created by anhvannguyen on 7/29/15.
  */
@@ -38,7 +40,14 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        mCursor.moveToPosition(position);
 
+        int firstNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_FIRST_NAME);
+        String firstName = mCursor.getString(firstNameIndex);
+        int lastNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_LAST_NAME);
+        String lastName = mCursor.getString(lastNameIndex);
+
+        holder.mAddressTextView.setText(String.format("%1$s %2$s", firstName, lastName));
     }
 
     @Override
