@@ -21,6 +21,7 @@ public class AddressDBHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_ADDRESS_TABLE = "CREATE TABLE " + AddressContract.AddressEntry.TABLE_NAME + " (" +
                 AddressContract.AddressEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 AddressContract.AddressEntry.COLUMN_ALIAS + " TEXT, " +
+                AddressContract.AddressEntry.COLUMN_NAME + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_FIRST_NAME + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_MIDDLE_NAME + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_LAST_NAME + " TEXT, " +

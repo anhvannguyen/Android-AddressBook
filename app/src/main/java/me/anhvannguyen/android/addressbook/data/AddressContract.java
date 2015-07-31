@@ -30,6 +30,9 @@ public class AddressContract {
         // Person nickname or alias
         public static final String COLUMN_ALIAS = "alias";
 
+        // Full name
+        public static final String COLUMN_NAME = "name";
+
         // First name
         public static final String COLUMN_FIRST_NAME = "first_name";
 
