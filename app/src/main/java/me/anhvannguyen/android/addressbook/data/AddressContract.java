@@ -1,5 +1,8 @@
 package me.anhvannguyen.android.addressbook.data;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -7,7 +10,21 @@ import android.provider.BaseColumns;
  */
 public class AddressContract {
 
+    public static final String CONTENT_AUTHORITY = "me.anhvannguyen.android.addressbook";
+
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    public static final String PATH_ADDRESS = "address";
+
     public static final class AddressEntry implements BaseColumns {
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_ADDRESS).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ADDRESS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ADDRESS;
+
         public static final String TABLE_NAME = "address";
 
         // Person nickname or alias
@@ -40,7 +57,13 @@ public class AddressContract {
         // Postal zip code
         public static final String COLUMN_ZIPCODE = "zipcode";
 
+        public static final String getAddressId(Uri uri) {
+            return uri.getPathSegments().get(1);
+        }
 
+        public static Uri buildAddressUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
     }
 
     // Creating phone table for for possible future use.
