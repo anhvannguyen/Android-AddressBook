@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 /**
@@ -18,7 +19,8 @@ public class AddressContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+        mOpenHelper = new AddressDBHelper(getContext());
+        return true;
     }
 
     private static UriMatcher buildUriMatcher() {
@@ -47,21 +49,147 @@ public class AddressContentProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        final SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+
+        Cursor retCursor;
+        switch (match) {
+            case ADDRESS:
+                retCursor = db.query(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            case ADDRESS_WITH_ID:
+                String addressID = AddressContract.AddressEntry.getAddressId(uri);
+                retCursor = db.query(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        projection,
+                        AddressContract.AddressEntry._ID + " = ?",
+                        new String[]{addressID},
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        return retCursor;
     }
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+
+        Uri returnUri;
+
+        switch (match) {
+            case ADDRESS: {
+                long _id = db.insert(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        null,
+                        values
+                );
+                if (_id > 0) {
+                    returnUri = AddressContract.AddressEntry.buildAddressUri(_id);
+                } else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+        final int match = sUriMatcher.match(uri);
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        int rowsDeleted;
+
+        // this makes delete all rows return the number of rows deleted
+        if (null == selection) selection = "1";
+
+        switch (match) {
+            case ADDRESS: {
+                rowsDeleted = db.delete(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        selection,
+                        selectionArgs
+                );
+                break;
+            }
+            case ADDRESS_WITH_ID: {
+                String todoId = AddressContract.AddressEntry.getAddressId(uri);
+                rowsDeleted = db.delete(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        AddressContract.AddressEntry._ID + " = ?",
+                        new String[]{todoId}
+                );
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+
+        }
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        final int match = sUriMatcher.match(uri);
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        int rowsUpdated;
+
+        switch (match) {
+            case ADDRESS: {
+                rowsUpdated = db.update(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs
+                );
+                break;
+            }
+            case ADDRESS_WITH_ID: {
+                String todoId = AddressContract.AddressEntry.getAddressId(uri);
+                rowsUpdated = db.update(
+                        AddressContract.AddressEntry.TABLE_NAME,
+                        values,
+                        AddressContract.AddressEntry._ID + " = ?",
+                        new String[]{todoId}
+                );
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+
+        }
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
+    }
+
+    @Override
+    public void shutdown() {
+        mOpenHelper.close();
+        super.shutdown();
     }
 }
