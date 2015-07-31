@@ -27,17 +27,26 @@ public class AddressContentProvider extends ContentProvider {
 
         matcher.addURI(authority, AddressContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AddressContract.PATH_ADDRESS + "/#", ADDRESS_WITH_ID);
-        
+
         return matcher;
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+    public String getType(Uri uri) {
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ADDRESS:
+                return AddressContract.AddressEntry.CONTENT_TYPE;
+            case ADDRESS_WITH_ID:
+                return AddressContract.AddressEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 
     @Override
-    public String getType(Uri uri) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         return null;
     }
 
