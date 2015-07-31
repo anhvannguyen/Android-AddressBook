@@ -27,6 +27,7 @@ public class AddressDBHelper extends SQLiteOpenHelper {
                 AddressContract.AddressEntry.COLUMN_PHONE + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_EMAIL + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_STREET + " TEXT, " +
+                AddressContract.AddressEntry.COLUMN_CITY + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_STATE + " TEXT, " +
                 AddressContract.AddressEntry.COLUMN_ZIPCODE + " INTEGER" +
                 ")";
