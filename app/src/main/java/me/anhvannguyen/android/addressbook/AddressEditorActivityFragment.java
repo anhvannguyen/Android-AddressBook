@@ -1,9 +1,8 @@
 package me.anhvannguyen.android.addressbook;
 
-import android.support.design.widget.Snackbar;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +59,16 @@ public class AddressEditorActivityFragment extends Fragment {
 
         mPhoneEditText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
+        mNameInputLayout.setErrorEnabled(true);
+
         mSaveButton = (Button) rootView.findViewById(R.id.save_button);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Snackbar.make(rootView, "Save Works!", Snackbar.LENGTH_SHORT).show();
+                if (mNameEditText.getText().length() <= 0) {
+                    mNameInputLayout.setError(getString(R.string.error_name_required));
+                }
             }
         });
 
