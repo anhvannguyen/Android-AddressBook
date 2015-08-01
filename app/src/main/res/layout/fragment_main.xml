@@ -26,6 +26,7 @@
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_action_add"
             app:backgroundTint="@color/primary"
+            app:rippleColor="@color/accent"
             app:fabSize="normal"
             app:layout_anchor="@id/coordinator_layout"
             app:layout_anchorGravity="bottom|right|end"/>

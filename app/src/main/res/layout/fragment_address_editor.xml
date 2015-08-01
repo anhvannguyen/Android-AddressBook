@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:hint="@string/name_editor_hint"/>
     </android.support.design.widget.TextInputLayout>
 
