@@ -13,4 +13,5 @@
     <string name="state_editor_hint">State</string>
     <string name="zip_editor_hint">Zip Code</string>
     <string name="save_button_text">Save</string>
+    <string name="error_name_required">Name Required</string>
 </resources>
