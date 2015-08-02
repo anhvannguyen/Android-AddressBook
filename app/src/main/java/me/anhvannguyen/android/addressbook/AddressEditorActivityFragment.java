@@ -1,5 +1,6 @@
 package me.anhvannguyen.android.addressbook;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import me.anhvannguyen.android.addressbook.data.AddressContract;
 
 
 /**
@@ -68,6 +71,18 @@ public class AddressEditorActivityFragment extends Fragment {
             public void onClick(View v) {
                 if (mNameEditText.getText().length() <= 0) {
                     mNameInputLayout.setError(getString(R.string.error_name_required));
+                } else {
+                    ContentValues addressValue = new ContentValues();
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_PHONE, mPhoneEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_STREET, mStreetEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_CITY, mCityEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
+                    addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
+
+                    //getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
+                    getActivity().finish();
                 }
             }
         });
