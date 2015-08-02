@@ -42,12 +42,16 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
     public void onBindViewHolder(ViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
-        int firstNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_FIRST_NAME);
-        String firstName = mCursor.getString(firstNameIndex);
-        int lastNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_LAST_NAME);
-        String lastName = mCursor.getString(lastNameIndex);
+//        int firstNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_FIRST_NAME);
+//        String firstName = mCursor.getString(firstNameIndex);
+//        int lastNameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_LAST_NAME);
+//        String lastName = mCursor.getString(lastNameIndex);
+//
+//        holder.mAddressTextView.setText(String.format("%1$s %2$s", firstName, lastName));
 
-        holder.mAddressTextView.setText(String.format("%1$s %2$s", firstName, lastName));
+        int nameIndex = mCursor.getColumnIndex(AddressContract.AddressEntry.COLUMN_NAME);
+        String userName = mCursor.getString(nameIndex);
+        holder.mAddressTextView.setText(userName);
     }
 
     @Override
