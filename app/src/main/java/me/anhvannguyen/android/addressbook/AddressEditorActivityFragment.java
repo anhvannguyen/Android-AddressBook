@@ -81,7 +81,7 @@ public class AddressEditorActivityFragment extends Fragment {
                     addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
                     addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
 
-                    //getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
+                    getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
                     getActivity().finish();
                 }
             }
