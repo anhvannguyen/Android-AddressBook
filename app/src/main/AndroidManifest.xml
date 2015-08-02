@@ -24,6 +24,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.anhvannguyen.android.addressbook.MainActivity" />
         </activity>
+        <provider
+            android:authorities="me.anhvannguyen.android.addressbook"
+            android:name=".data.AddressContentProvider"/>
     </application>
 
 </manifest>
