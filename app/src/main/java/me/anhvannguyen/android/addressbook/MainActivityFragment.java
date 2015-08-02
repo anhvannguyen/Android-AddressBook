@@ -13,6 +13,9 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +34,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private CoordinatorLayout mCoordinatorLayout;
 
     public MainActivityFragment() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -61,6 +65,28 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         mAddressRecyclerView.setAdapter(mRecycleAdapter);
         
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_delete_all:
+                getActivity().getContentResolver().delete(
+                        AddressContract.AddressEntry.CONTENT_URI,
+                        null,
+                        null
+                );
+                getLoaderManager().restartLoader(ADDRESS_LIST_LOADER, null, this);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
