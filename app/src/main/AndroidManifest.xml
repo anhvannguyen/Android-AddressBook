@@ -24,9 +24,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.anhvannguyen.android.addressbook.MainActivity" />
         </activity>
+
         <provider
-            android:authorities="me.anhvannguyen.android.addressbook"
-            android:name=".data.AddressContentProvider"/>
+            android:name=".data.AddressContentProvider"
+            android:authorities="me.anhvannguyen.android.addressbook" />
+
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.anhvannguyen.android.addressbook.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
