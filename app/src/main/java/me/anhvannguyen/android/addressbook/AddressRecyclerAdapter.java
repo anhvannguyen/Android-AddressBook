@@ -16,18 +16,32 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
 public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecyclerAdapter.ViewHolder> {
     private Cursor mCursor;
     private Context mContext;
+    private AddressAdapterOnClickHandler mClickHandler;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static interface AddressAdapterOnClickHandler {
+        void onClick(ViewHolder viewHolder);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView mAddressTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mAddressTextView = (TextView) itemView.findViewById(R.id.address_item_name_textview);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            mCursor.moveToPosition(position);
+            mClickHandler.onClick(this);
         }
     }
 
-    public AddressRecyclerAdapter(Context context) {
+    public AddressRecyclerAdapter(Context context, AddressAdapterOnClickHandler clickHandler) {
         mContext = context;
+        mClickHandler = clickHandler;
     }
 
     @Override
