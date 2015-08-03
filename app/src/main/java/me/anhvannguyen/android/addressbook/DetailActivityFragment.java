@@ -98,6 +98,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             return;
         }
 
+        mNameTextView.setText(data.getString(COL_ADDRESS_NAME));
+        mPhoneTextView.setText(data.getString(COL_ADDRESS_PHONE));
+        mEmailTextView.setText(data.getString(COL_ADDRESS_EMAIL));
+        mStreetTextView.setText(data.getString(COL_ADDRESS_STREET));
+        mCityTextView.setText(data.getString(COL_ADDRESS_CITY));
+        mStateTextView.setText(data.getString(COL_ADDRESS_STATE));
+        mZipTextView.setText(data.getString(COL_ADDRESS_ZIP));
+
     }
 
     @Override
