@@ -26,12 +26,14 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
     private static final int ADDRESS_LIST_LOADER = 0;
 
     private RecyclerView mAddressRecyclerView;
     private AddressRecyclerAdapter mRecycleAdapter;
     private FloatingActionButton mAddButton;
     private CoordinatorLayout mCoordinatorLayout;
+    
 
     public MainActivityFragment() {
         setHasOptionsMenu(true);
@@ -44,13 +46,22 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
         mCoordinatorLayout = (CoordinatorLayout) rootView.findViewById(R.id.coordinator_layout);
 
-        mRecycleAdapter = new AddressRecyclerAdapter(getActivity());
+        mRecycleAdapter = new AddressRecyclerAdapter(getActivity(),
+                new AddressRecyclerAdapter.AddressAdapterOnClickHandler() {
+                    @Override
+                    public void onClick(AddressRecyclerAdapter.ViewHolder viewHolder) {
+                        Snackbar.make(
+                                mCoordinatorLayout,
+                                "Position: " + viewHolder.getAdapterPosition() + " clicked",
+                                Snackbar.LENGTH_SHORT
+                        ).show();
+                    }
+                });
 
         mAddButton = (FloatingActionButton) rootView.findViewById(R.id.add_fab);
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(mCoordinatorLayout, "Add Works!", Snackbar.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), AddressEditorActivity.class);
                 startActivity(intent);
             }
