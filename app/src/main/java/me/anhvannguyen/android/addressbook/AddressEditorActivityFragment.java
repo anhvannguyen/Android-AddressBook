@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class AddressEditorActivityFragment extends Fragment {
             public void onClick(View v) {
                 if (mNameEditText.getText().length() <= 0) {
                     mNameInputLayout.setError(getString(R.string.error_name_required));
+//                    mNameEditText.setError(getString(R.string.error_name_required));
                 } else {
                     ContentValues addressValue = new ContentValues();
                     addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
@@ -88,5 +90,9 @@ public class AddressEditorActivityFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    boolean isValidEmailFormat(CharSequence email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
