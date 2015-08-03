@@ -4,6 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_delete_all">Delete All</string>
     <string name="title_activity_address_editor">AddressEditorActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
 
     <!-- Editor Strings -->
     <string name="name_editor_hint">Name</string>
@@ -15,5 +16,14 @@
     <string name="zip_editor_hint">Zip Code</string>
     <string name="save_button_text">Save</string>
     <string name="error_name_required">Name Required</string>
-    <string name="title_activity_detail">DetailActivity</string>
+
+    <!-- Detail Strings -->
+    <string name="name_detail_label">Name:</string>
+    <string name="phone_detail_label">Phone:</string>
+    <string name="email_detail_label">Email:</string>
+    <string name="street_detail_label">Street:</string>
+    <string name="city_detail_label">City:</string>
+    <string name="state_detail_label">State:</string>
+    <string name="zip_detail_label">Zip Code:</string>
+
 </resources>
