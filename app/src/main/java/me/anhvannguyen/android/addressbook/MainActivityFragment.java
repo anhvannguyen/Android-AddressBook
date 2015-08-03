@@ -2,10 +2,10 @@ package me.anhvannguyen.android.addressbook;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -33,7 +33,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private AddressRecyclerAdapter mRecycleAdapter;
     private FloatingActionButton mAddButton;
     private CoordinatorLayout mCoordinatorLayout;
-    
+
 
     public MainActivityFragment() {
         setHasOptionsMenu(true);
@@ -50,11 +50,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 new AddressRecyclerAdapter.AddressAdapterOnClickHandler() {
                     @Override
                     public void onClick(AddressRecyclerAdapter.ViewHolder viewHolder) {
-                        Snackbar.make(
-                                mCoordinatorLayout,
-                                "Position: " + viewHolder.getAdapterPosition() + " clicked",
-                                Snackbar.LENGTH_SHORT
-                        ).show();
+                        int idIndex = mRecycleAdapter.getCursor().getColumnIndex(AddressContract.AddressEntry._ID);
+                        long id = mRecycleAdapter.getCursor().getLong(idIndex);
+                        Uri addresUri = AddressContract.AddressEntry.buildAddressUri(id);
+                        Intent intent = new Intent(getActivity(), DetailActivity.class)
+                                .setData(addresUri);
+                        startActivity(intent);
                     }
                 });
 
