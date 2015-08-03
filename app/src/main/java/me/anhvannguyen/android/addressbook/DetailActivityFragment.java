@@ -20,6 +20,7 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ADDRESS_DETAIL_LOADER = 0;
+    public static final String ADDRESS_DETAIL_URI = "ADDRESS_URI";
     private Uri mUri;
 
     private static final String[] ADDRESS_DETAIL_PROJECTION = {
@@ -59,6 +60,11 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mUri = arguments.getParcelable(ADDRESS_DETAIL_URI);
+        }
 
         mNameTextView = (TextView) rootView.findViewById(R.id.name_detail_textview);
         mPhoneTextView = (TextView) rootView.findViewById(R.id.phone_detail_textview);
