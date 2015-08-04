@@ -3,11 +3,15 @@ package me.anhvannguyen.android.addressbook;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -54,6 +58,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
 
     public DetailActivityFragment() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -75,6 +80,23 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mZipTextView = (TextView) rootView.findViewById(R.id.zip_detail_textview);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_delete:
+                Snackbar.make(getView(), "Delete...", Snackbar.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
