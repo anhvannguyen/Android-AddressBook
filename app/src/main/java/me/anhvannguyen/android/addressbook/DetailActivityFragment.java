@@ -3,7 +3,6 @@ package me.anhvannguyen.android.addressbook;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -93,10 +92,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         switch (id) {
             case R.id.action_delete:
-                Snackbar.make(getView(), "Delete...", Snackbar.LENGTH_SHORT).show();
+                deleteAddress();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAddress() {
+        if (mUri != null) {
+            getActivity().getContentResolver().delete(
+                    mUri,
+                    null,
+                    null
+            );
+            getActivity().finish();
+        }
     }
 
     @Override
