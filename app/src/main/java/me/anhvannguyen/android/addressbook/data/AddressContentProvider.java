@@ -132,11 +132,11 @@ public class AddressContentProvider extends ContentProvider {
                 break;
             }
             case ADDRESS_WITH_ID: {
-                String todoId = AddressContract.AddressEntry.getAddressId(uri);
+                String addressId = AddressContract.AddressEntry.getAddressId(uri);
                 rowsDeleted = db.delete(
                         AddressContract.AddressEntry.TABLE_NAME,
                         AddressContract.AddressEntry._ID + " = ?",
-                        new String[]{todoId}
+                        new String[]{addressId}
                 );
                 break;
             }
@@ -167,12 +167,12 @@ public class AddressContentProvider extends ContentProvider {
                 break;
             }
             case ADDRESS_WITH_ID: {
-                String todoId = AddressContract.AddressEntry.getAddressId(uri);
+                String addressId = AddressContract.AddressEntry.getAddressId(uri);
                 rowsUpdated = db.update(
                         AddressContract.AddressEntry.TABLE_NAME,
                         values,
                         AddressContract.AddressEntry._ID + " = ?",
-                        new String[]{todoId}
+                        new String[]{addressId}
                 );
                 break;
             }
