@@ -95,18 +95,23 @@ public class AddressEditorActivityFragment extends Fragment {
         }
 
         if (inputError ==  false) {
-            ContentValues addressValue = new ContentValues();
-            addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_PHONE, mPhoneEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_STREET, mStreetEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_CITY, mCityEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
-            addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
-
-            getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
+            getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, getAddressContentValue());
             getActivity().finish();
         }
+    }
+
+    // Helper to generate the values from the EditText fields to ContentValues
+    private ContentValues getAddressContentValue() {
+        ContentValues addressValue = new ContentValues();
+        addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_PHONE, mPhoneEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_STREET, mStreetEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_CITY, mCityEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
+        addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
+
+        return addressValue;
     }
 
 }
