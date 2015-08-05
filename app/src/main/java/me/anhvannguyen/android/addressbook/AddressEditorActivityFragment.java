@@ -64,28 +64,14 @@ public class AddressEditorActivityFragment extends Fragment {
         mPhoneEditText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         mNameInputLayout.setErrorEnabled(true);
+        mEmailInputLayout.setErrorEnabled(true);
 
         mSaveButton = (Button) rootView.findViewById(R.id.save_button);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (mNameEditText.getText().length() <= 0) {
-                    mNameInputLayout.setError(getString(R.string.error_name_required));
-//                    mNameEditText.setError(getString(R.string.error_name_required));
-                } else {
-                    ContentValues addressValue = new ContentValues();
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_PHONE, mPhoneEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_STREET, mStreetEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_CITY, mCityEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
-                    addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
-
-                    getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
-                    getActivity().finish();
-                }
+                insertAddress();
             }
         });
 
@@ -95,4 +81,32 @@ public class AddressEditorActivityFragment extends Fragment {
     boolean isValidEmailFormat(CharSequence email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
+    private void insertAddress() {
+        boolean inputError = false;
+        if (mNameEditText.getText().length() <= 0) {
+            mNameInputLayout.setError(getString(R.string.error_name_required));
+//                    mNameEditText.setError(getString(R.string.error_name_required));
+            inputError = true;
+        }
+        if (mEmailEditText.length() > 0 && !isValidEmailFormat(mEmailEditText.getText())) {
+            mEmailInputLayout.setError("Invalid Email Format");
+            inputError = true;
+        }
+
+        if (inputError ==  false) {
+            ContentValues addressValue = new ContentValues();
+            addressValue.put(AddressContract.AddressEntry.COLUMN_NAME, mNameEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_PHONE, mPhoneEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_STREET, mStreetEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_CITY, mCityEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_STATE, mStateEditText.getText().toString());
+            addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
+
+            getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, addressValue);
+            getActivity().finish();
+        }
+    }
+
 }
