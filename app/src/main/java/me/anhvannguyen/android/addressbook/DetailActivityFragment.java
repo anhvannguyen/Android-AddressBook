@@ -1,5 +1,7 @@
 package me.anhvannguyen.android.addressbook;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -100,12 +102,29 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     private void deleteAddress() {
         if (mUri != null) {
-            getActivity().getContentResolver().delete(
-                    mUri,
-                    null,
-                    null
-            );
-            getActivity().finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(getString(R.string.dialog_message));
+            builder.setPositiveButton(getString(R.string.dialog_delete), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getActivity().getContentResolver().delete(
+                            mUri,
+                            null,
+                            null
+                    );
+                    getActivity().finish();
+                }
+            });
+            builder.setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
         }
     }
 
