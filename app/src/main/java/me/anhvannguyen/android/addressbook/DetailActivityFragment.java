@@ -25,7 +25,7 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ADDRESS_DETAIL_LOADER = 0;
-    public static final String ADDRESS_DETAIL_URI = "ADDRESS_URI";
+    public static final String ADDRESS_DETAIL_URI = "ADDRESS_DETAIL_URI";
     private Uri mUri;
 
     private static final String[] ADDRESS_DETAIL_PROJECTION = {
