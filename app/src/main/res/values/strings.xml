@@ -27,4 +27,11 @@
     <string name="state_detail_label">State:</string>
     <string name="zip_detail_label">Zip Code:</string>
 
+    <!-- Delete dialog -->
+    <string name="dialog_delete">Delete</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_message">Delete Address?</string>
+    <string name="dialog_title">Delete Address</string>
+
+
 </resources>
