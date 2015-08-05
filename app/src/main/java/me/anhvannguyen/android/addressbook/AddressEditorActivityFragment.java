@@ -1,6 +1,8 @@
 package me.anhvannguyen.android.addressbook;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,11 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  * A placeholder fragment containing a simple view.
  */
 public class AddressEditorActivityFragment extends Fragment {
+    private static final int ADDRESS_DETAIL_LOADER = 0;
+    public static final String ADDRESS_DETAIL_URI = "ADDRESS_URI";
+
+    private String mIntentString;
+
     private TextInputLayout mNameInputLayout;
     private TextInputLayout mPhoneInputLayout;
     private TextInputLayout mEmailInputLayout;
@@ -34,8 +41,9 @@ public class AddressEditorActivityFragment extends Fragment {
     private EditText mCityEditText;
     private EditText mStateEditText;
     private EditText mZipEditText;
-
     private Button mSaveButton;
+
+    private Uri mUri;
 
     public AddressEditorActivityFragment() {
     }
@@ -44,6 +52,17 @@ public class AddressEditorActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_address_editor, container, false);
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mUri = arguments.getParcelable(ADDRESS_DETAIL_URI);
+        }
+
+        if (mUri == null) {
+            mIntentString = Intent.ACTION_INSERT;
+        } else {
+            mIntentString = Intent.ACTION_EDIT;
+        }
 
         mNameInputLayout = (TextInputLayout) rootView.findViewById(R.id.name_textinputlayout);
         mPhoneInputLayout = (TextInputLayout) rootView.findViewById(R.id.phone_textinputlayout);
@@ -71,7 +90,11 @@ public class AddressEditorActivityFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                insertAddress();
+                if (mIntentString == Intent.ACTION_INSERT) {
+                    insertAddress();
+                } else {
+                    // TODO: Update Address
+                }
             }
         });
 
@@ -83,16 +106,7 @@ public class AddressEditorActivityFragment extends Fragment {
     }
 
     private void insertAddress() {
-        boolean inputError = false;
-        if (mNameEditText.getText().length() <= 0) {
-            mNameInputLayout.setError(getString(R.string.error_name_required));
-//                    mNameEditText.setError(getString(R.string.error_name_required));
-            inputError = true;
-        }
-        if (mEmailEditText.length() > 0 && !isValidEmailFormat(mEmailEditText.getText())) {
-            mEmailInputLayout.setError("Invalid Email Format");
-            inputError = true;
-        }
+        boolean inputError = inputFieldsHasError();
 
         if (inputError ==  false) {
             getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, getAddressContentValue());
@@ -112,6 +126,21 @@ public class AddressEditorActivityFragment extends Fragment {
         addressValue.put(AddressContract.AddressEntry.COLUMN_ZIPCODE, mZipEditText.getText().toString());
 
         return addressValue;
+    }
+
+    private boolean inputFieldsHasError() {
+        boolean inputError = false;
+        if (mNameEditText.getText().length() <= 0) {
+            mNameInputLayout.setError(getString(R.string.error_name_required));
+//                    mNameEditText.setError(getString(R.string.error_name_required));
+            inputError = true;
+        }
+        if (mEmailEditText.length() > 0 && !isValidEmailFormat(mEmailEditText.getText())) {
+            mEmailInputLayout.setError("Invalid Email Format");
+            inputError = true;
+        }
+
+        return inputError;
     }
 
 }
