@@ -2,10 +2,14 @@ package me.anhvannguyen.android.addressbook;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -20,9 +24,9 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AddressEditorActivityFragment extends Fragment {
+public class AddressEditorActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ADDRESS_DETAIL_LOADER = 0;
-    public static final String ADDRESS_DETAIL_URI = "ADDRESS_URI";
+    public static final String ADDRESS_DETAIL_URI = "ADDRESS_EDIT_URI";
 
     private String mIntentString;
 
@@ -44,6 +48,26 @@ public class AddressEditorActivityFragment extends Fragment {
     private Button mSaveButton;
 
     private Uri mUri;
+
+    private static final String[] ADDRESS_DETAIL_PROJECTION = {
+            AddressContract.AddressEntry._ID,
+            AddressContract.AddressEntry.COLUMN_NAME,
+            AddressContract.AddressEntry.COLUMN_PHONE,
+            AddressContract.AddressEntry.COLUMN_EMAIL,
+            AddressContract.AddressEntry.COLUMN_STREET,
+            AddressContract.AddressEntry.COLUMN_CITY,
+            AddressContract.AddressEntry.COLUMN_STATE,
+            AddressContract.AddressEntry.COLUMN_ZIPCODE
+    };
+
+    public static final int COL_ADDRESS_ID = 0;
+    public static final int COL_ADDRESS_NAME = 1;
+    public static final int COL_ADDRESS_PHONE = 2;
+    public static final int COL_ADDRESS_EMAIL = 3;
+    public static final int COL_ADDRESS_STREET = 4;
+    public static final int COL_ADDRESS_CITY = 5;
+    public static final int COL_ADDRESS_STATE = 6;
+    public static final int COL_ADDRESS_ZIP = 7;
 
     public AddressEditorActivityFragment() {
     }
@@ -143,4 +167,38 @@ public class AddressEditorActivityFragment extends Fragment {
         return inputError;
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        if (mUri == null) {
+            return null;
+        }
+        return new CursorLoader(
+                getActivity(),
+                mUri,
+                ADDRESS_DETAIL_PROJECTION,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (!data.moveToFirst()) {
+            return;
+        }
+
+        mNameEditText.setText(data.getString(COL_ADDRESS_NAME));
+        mPhoneEditText.setText(data.getString(COL_ADDRESS_PHONE));
+        mEmailEditText.setText(data.getString(COL_ADDRESS_EMAIL));
+        mStreetEditText.setText(data.getString(COL_ADDRESS_STREET));
+        mCityEditText.setText(data.getString(COL_ADDRESS_CITY));
+        mStateEditText.setText(data.getString(COL_ADDRESS_STATE));
+        mZipEditText.setText(data.getString(COL_ADDRESS_ZIP));
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }
