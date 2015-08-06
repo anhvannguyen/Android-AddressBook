@@ -139,6 +139,12 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
         return rootView;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(ADDRESS_DETAIL_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
     boolean isValidEmailFormat(CharSequence email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
