@@ -165,7 +165,7 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
             inputError = true;
         }
         if (mEmailEditText.length() > 0 && !isValidEmailFormat(mEmailEditText.getText())) {
-            mEmailInputLayout.setError("Invalid Email Format");
+            mEmailInputLayout.setError(getString(R.string.error_email_format));
             inputError = true;
         }
 
