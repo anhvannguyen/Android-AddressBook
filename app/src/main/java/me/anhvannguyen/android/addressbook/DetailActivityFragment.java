@@ -140,6 +140,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(ADDRESS_DETAIL_LOADER, null, this);
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if (mUri != null) {
             return new CursorLoader(
