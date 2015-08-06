@@ -12,6 +12,18 @@ public class AddressEditorActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_editor);
+
+        if (savedInstanceState == null) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(AddressEditorActivityFragment.ADDRESS_DETAIL_URI, getIntent().getData());
+
+            AddressEditorActivityFragment fragment = new AddressEditorActivityFragment();
+            fragment.setArguments(arguments);
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.address_editor_container, fragment)
+                    .commit();
+        }
     }
 
 
