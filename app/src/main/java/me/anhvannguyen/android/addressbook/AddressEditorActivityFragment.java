@@ -114,10 +114,24 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
 
             @Override
             public void onClick(View v) {
+                boolean inputError = inputFieldsHasError();
                 if (mIntentString == Intent.ACTION_INSERT) {
-                    insertAddress();
-                } else {
-                    // TODO: Update Address
+                    if (inputError == false) {
+                        getActivity().getContentResolver().insert(
+                                AddressContract.AddressEntry.CONTENT_URI,
+                                getAddressContentValue());
+                        getActivity().finish();
+                    }
+                } else if (mIntentString == Intent.ACTION_EDIT) {
+                    if (inputError == false) {
+                        getActivity().getContentResolver().update(
+                                mUri,
+                                getAddressContentValue(),
+                                null,
+                                null
+                        );
+                        getActivity().finish();
+                    }
                 }
             }
         });
@@ -127,15 +141,6 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
 
     boolean isValidEmailFormat(CharSequence email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private void insertAddress() {
-        boolean inputError = inputFieldsHasError();
-
-        if (inputError ==  false) {
-            getActivity().getContentResolver().insert(AddressContract.AddressEntry.CONTENT_URI, getAddressContentValue());
-            getActivity().finish();
-        }
     }
 
     // Helper to generate the values from the EditText fields to ContentValues
