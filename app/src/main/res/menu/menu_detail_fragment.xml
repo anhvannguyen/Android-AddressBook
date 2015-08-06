@@ -7,4 +7,9 @@
         android:orderInCategory="99"
         android:title="@string/action_delete"
         app:showAsAction="always|withText"/>
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="98"
+        android:title="@string/action_edit"
+        app:showAsAction="never"/>
 </menu>
