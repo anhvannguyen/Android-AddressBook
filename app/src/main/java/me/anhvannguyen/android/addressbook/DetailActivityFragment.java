@@ -2,6 +2,7 @@ package me.anhvannguyen.android.addressbook;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -95,6 +96,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         switch (id) {
             case R.id.action_delete:
                 deleteAddress();
+                break;
+            case R.id.action_edit:
+                Intent intent = new Intent(getActivity(), AddressEditorActivity.class).setData(mUri);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
