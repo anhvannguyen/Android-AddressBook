@@ -185,14 +185,42 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         if (data.getString(COL_ADDRESS_PHONE).length() == 0) {
             mCallButton.setEnabled(false);
+        } else {
+            mCallButton.setEnabled(true);
+            mCallButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
         if (data.getString(COL_ADDRESS_EMAIL).length() == 0) {
             mEmailButton.setEnabled(false);
+        } else {
+            mEmailButton.setEnabled(true);
+            mEmailButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    String emailUriString = "mailto:" + data.getString(COL_ADDRESS_EMAIL);
+//                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse(emailUriString));
+//                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email Subject");
+//                    startActivity(Intent.createChooser(emailIntent, "Send Email"));
+                }
+            });
+
         }
         if (data.getString(COL_ADDRESS_STREET).length() == 0 &&
                 (data.getString(COL_ADDRESS_CITY).length() == 0
                         || data.getString(COL_ADDRESS_ZIP).length() == 0)) {
             mMapsButton.setEnabled(false);
+        } else {
+            mMapsButton.setEnabled(true);
+            mMapsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                }
+            });
         }
 
     }
