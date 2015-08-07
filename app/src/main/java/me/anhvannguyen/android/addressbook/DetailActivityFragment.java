@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import me.anhvannguyen.android.addressbook.data.AddressContract;
@@ -58,6 +59,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private TextView mStateTextView;
     private TextView mZipTextView;
 
+    private Button mCallButton;
+    private Button mEmailButton;
+    private Button mMapsButton;
+
 
     public DetailActivityFragment() {
         setHasOptionsMenu(true);
@@ -80,6 +85,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mCityTextView = (TextView) rootView.findViewById(R.id.city_detail_textview);
         mStateTextView = (TextView) rootView.findViewById(R.id.state_detail_textview);
         mZipTextView = (TextView) rootView.findViewById(R.id.zip_detail_textview);
+
+        mCallButton = (Button) rootView.findViewById(R.id.call_button);
+        mEmailButton = (Button) rootView.findViewById(R.id.email_button);
+        mMapsButton = (Button) rootView.findViewById(R.id.maps_button);
 
         return rootView;
     }
@@ -173,6 +182,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mCityTextView.setText(data.getString(COL_ADDRESS_CITY));
         mStateTextView.setText(data.getString(COL_ADDRESS_STATE));
         mZipTextView.setText(data.getString(COL_ADDRESS_ZIP));
+
+        if (data.getString(COL_ADDRESS_PHONE).length() == 0) {
+            mCallButton.setEnabled(false);
+        }
+        if (data.getString(COL_ADDRESS_EMAIL).length() == 0) {
+            mEmailButton.setEnabled(false);
+        }
+        if (data.getString(COL_ADDRESS_STREET).length() == 0 &&
+                (data.getString(COL_ADDRESS_CITY).length() == 0
+                        || data.getString(COL_ADDRESS_ZIP).length() == 0)) {
+            mMapsButton.setEnabled(false);
+        }
 
     }
 
