@@ -38,6 +38,7 @@
             android:id="@+id/phone_detail_textview"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:textSize="16dp"
+            android:autoLink="phone"
             app:layout_columnWeight="3"/>
 
         <TextView
@@ -50,6 +51,7 @@
             android:id="@+id/email_detail_textview"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:textSize="16dp"
+            android:autoLink="email"
             app:layout_columnWeight="3"/>
 
         <TextView
