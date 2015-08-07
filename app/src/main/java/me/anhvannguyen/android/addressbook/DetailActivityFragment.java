@@ -174,16 +174,29 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if (!data.moveToFirst()) {
             return;
         }
+        
+        final String name = data.getString(COL_ADDRESS_NAME);
+        mNameTextView.setText(name);
 
-        mNameTextView.setText(data.getString(COL_ADDRESS_NAME));
-        mPhoneTextView.setText(data.getString(COL_ADDRESS_PHONE));
-        mEmailTextView.setText(data.getString(COL_ADDRESS_EMAIL));
-        mStreetTextView.setText(data.getString(COL_ADDRESS_STREET));
-        mCityTextView.setText(data.getString(COL_ADDRESS_CITY));
-        mStateTextView.setText(data.getString(COL_ADDRESS_STATE));
-        mZipTextView.setText(data.getString(COL_ADDRESS_ZIP));
+        final String phone = data.getString(COL_ADDRESS_PHONE);
+        mPhoneTextView.setText(phone);
 
-        if (data.getString(COL_ADDRESS_PHONE).length() == 0) {
+        final String email = data.getString(COL_ADDRESS_EMAIL);
+        mEmailTextView.setText(email);
+
+        final String street = data.getString(COL_ADDRESS_STREET);
+        mStreetTextView.setText(street);
+
+        final String city = data.getString(COL_ADDRESS_CITY);
+        mCityTextView.setText(city);
+
+        final String state = data.getString(COL_ADDRESS_STATE);
+        mStateTextView.setText(state);
+
+        final String zip = data.getString(COL_ADDRESS_ZIP);
+        mZipTextView.setText(zip);
+
+        if (phone.length() == 0) {
             mCallButton.setEnabled(false);
         } else {
             mCallButton.setEnabled(true);
@@ -194,31 +207,31 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                 }
             });
         }
-        if (data.getString(COL_ADDRESS_EMAIL).length() == 0) {
+        if (email.length() == 0) {
             mEmailButton.setEnabled(false);
         } else {
             mEmailButton.setEnabled(true);
             mEmailButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    String emailUriString = "mailto:" + data.getString(COL_ADDRESS_EMAIL);
-//                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse(emailUriString));
-//                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email Subject");
-//                    startActivity(Intent.createChooser(emailIntent, "Send Email"));
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                    intent.putExtra(Intent.EXTRA_EMAIL, email);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
                 }
             });
 
         }
-        if (data.getString(COL_ADDRESS_STREET).length() == 0 &&
-                (data.getString(COL_ADDRESS_CITY).length() == 0
-                        || data.getString(COL_ADDRESS_ZIP).length() == 0)) {
+        if (street.length() == 0 && (city.length() == 0 || zip.length() == 0)) {
             mMapsButton.setEnabled(false);
         } else {
             mMapsButton.setEnabled(true);
             mMapsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
+
                 }
             });
         }
