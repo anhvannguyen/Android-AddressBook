@@ -31,6 +31,8 @@
     <string name="call_button_label">Call</string>
     <string name="email_button_label">Email</string>
     <string name="maps_button_label">Direction</string>
+    <string name="error_phone_dialer">Cannot Resolve Phone Dialer</string>
+    <string name="error_email_client">Cannot Resolve Email Client</string>
 
     <!-- Delete dialog -->
     <string name="dialog_delete">Delete</string>
