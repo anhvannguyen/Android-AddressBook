@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -174,7 +175,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if (!data.moveToFirst()) {
             return;
         }
-        
+
         final String name = data.getString(COL_ADDRESS_NAME);
         mNameTextView.setText(name);
 
@@ -203,7 +204,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mCallButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phone));
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Snackbar.make(getView(), "No phone client found", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -219,6 +226,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     intent.putExtra(Intent.EXTRA_EMAIL, email);
                     if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivity(intent);
+                    } else {
+                        Snackbar.make(getView(), "No email client found", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -231,7 +240,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             mMapsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Uri geoLocation = Uri.parse("geo:0,0?q=" + street + "," + zip);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(geoLocation);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
                 }
             });
         }
