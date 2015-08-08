@@ -209,7 +209,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivity(intent);
                     } else {
-                        Snackbar.make(getView(), "No phone client found", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getView(), getString(R.string.error_phone_dialer), Snackbar.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -227,7 +227,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivity(intent);
                     } else {
-                        Snackbar.make(getView(), "No email client found", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getView(), getString(R.string.error_email_client), Snackbar.LENGTH_SHORT).show();
                     }
                 }
             });
