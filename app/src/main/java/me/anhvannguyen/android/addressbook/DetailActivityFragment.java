@@ -245,6 +245,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     intent.setData(geoLocation);
                     if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivity(intent);
+                    } else {
+                        Snackbar.make(getView(), getString(R.string.error_map_client), Snackbar.LENGTH_SHORT).show();
                     }
                 }
             });
