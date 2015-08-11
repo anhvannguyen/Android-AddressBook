@@ -69,6 +69,14 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
     public static final int COL_ADDRESS_STATE = 6;
     public static final int COL_ADDRESS_ZIP = 7;
 
+    private static final String NAME_KEY = "name_edit_key";
+    private static final String PHONE_KEY = "phone_edit_key";
+    private static final String EMAIL_KEY = "email_edit_key";
+    private static final String STREET_KEY = "street_edit_key";
+    private static final String CITY_KEY = "city_edit_key";
+    private static final String STATE_KEY = "state_edit_key";
+    private static final String ZIP_KEY = "zip_edit_key";
+
     public AddressEditorActivityFragment() {
     }
 
@@ -104,6 +112,16 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
         mStateEditText = (EditText) rootView.findViewById(R.id.state_edittext);
         mZipEditText = (EditText) rootView.findViewById(R.id.zip_edittext);
 
+        if (savedInstanceState != null) {
+            mNameEditText.setText(savedInstanceState.getString(NAME_KEY));
+            mPhoneEditText.setText(savedInstanceState.getString(PHONE_KEY));
+            mEmailEditText.setText(savedInstanceState.getString(EMAIL_KEY));
+            mStreetEditText.setText(savedInstanceState.getString(STREET_KEY));
+            mCityEditText.setText(savedInstanceState.getString(CITY_KEY));
+            mStateEditText.setText(savedInstanceState.getString(STATE_KEY));
+            mZipEditText.setText(savedInstanceState.getString(ZIP_KEY));
+        }
+
         mPhoneEditText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         mNameInputLayout.setErrorEnabled(true);
@@ -137,6 +155,18 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(NAME_KEY, mNameEditText.getText().toString());
+        outState.putString(PHONE_KEY, mPhoneEditText.getText().toString());
+        outState.putString(EMAIL_KEY, mEmailEditText.getText().toString());
+        outState.putString(STREET_KEY, mStreetEditText.getText().toString());
+        outState.putString(CITY_KEY, mCityEditText.getText().toString());
+        outState.putString(STATE_KEY, mStateEditText.getText().toString());
+        outState.putString(ZIP_KEY, mZipEditText.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
