@@ -1,0 +1,132 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="me.anhvannguyen.android.addressbook.DetailActivityFragment">
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
+        app:columnCount="2">
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/name_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/name_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/phone_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/phone_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            android:autoLink="phone"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/email_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/email_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            android:autoLink="email"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/street_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/street_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/city_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/city_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/state_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/state_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            app:layout_columnWeight="3"/>
+
+        <TextView
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:text="@string/zip_detail_label"
+            android:textSize="16dp"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            android:id="@+id/zip_detail_textview"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:textSize="16dp"
+            app:layout_columnWeight="3"/>
+
+    </android.support.v7.widget.GridLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/call_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/call_button_label"/>
+        <Button
+            android:id="@+id/email_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/email_button_label"/>
+        <Button
+            android:id="@+id/maps_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/maps_button_label"/>
+    </LinearLayout>
+
+</LinearLayout>
