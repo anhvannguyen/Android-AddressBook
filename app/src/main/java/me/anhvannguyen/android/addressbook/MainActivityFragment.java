@@ -34,6 +34,15 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private FloatingActionButton mAddButton;
     private CoordinatorLayout mCoordinatorLayout;
 
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface AddressSelectedCallback {
+        public void onItemSelected(Uri addressUri);
+    }
+
 
     public MainActivityFragment() {
         setHasOptionsMenu(true);
