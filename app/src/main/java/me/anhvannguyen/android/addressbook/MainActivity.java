@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity implements MainActivityFragm
     public void onItemSelected(Uri addressUri) {
         if (mTwoPane) {
             Bundle args = new Bundle();
-            args.putParcelable(DetailActivityFragment.DETAIL_URI, addressUri);
+            args.putParcelable(DetailActivityFragment.ADDRESS_DETAIL_URI, addressUri);
 
             DetailActivityFragment fragment = new DetailActivityFragment();
             fragment.setArguments(args);
