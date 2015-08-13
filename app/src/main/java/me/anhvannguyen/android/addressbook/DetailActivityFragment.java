@@ -152,7 +152,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onResume() {
         super.onResume();
-        getLoaderManager().restartLoader(ADDRESS_DETAIL_LOADER, null, this);
+        if (mUri != null) {
+            getLoaderManager().restartLoader(ADDRESS_DETAIL_LOADER, null, this);
+        }
     }
 
     @Override
