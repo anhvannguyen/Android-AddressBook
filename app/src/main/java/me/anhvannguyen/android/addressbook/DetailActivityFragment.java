@@ -60,6 +60,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private TextView mStateTextView;
     private TextView mZipTextView;
 
+    private TextView mNameLabel;
+    private TextView mPhoneLabel;
+    private TextView mEmailLabel;
+    private TextView mStreetLabel;
+    private TextView mCityLabel;
+    private TextView mStateLabel;
+    private TextView mZipLabel;
+
     private Button mCallButton;
     private Button mEmailButton;
     private Button mMapsButton;
@@ -87,9 +95,28 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mStateTextView = (TextView) rootView.findViewById(R.id.state_detail_textview);
         mZipTextView = (TextView) rootView.findViewById(R.id.zip_detail_textview);
 
+        mNameLabel = (TextView) rootView.findViewById(R.id.name_detail_label);
+        mPhoneLabel = (TextView) rootView.findViewById(R.id.phone_detail_label);
+        mEmailLabel = (TextView) rootView.findViewById(R.id.email_detail_label);
+        mStreetLabel = (TextView) rootView.findViewById(R.id.street_detail_label);
+        mCityLabel = (TextView) rootView.findViewById(R.id.city_detail_label);
+        mStateLabel = (TextView) rootView.findViewById(R.id.state_detail_label);
+        mZipLabel = (TextView) rootView.findViewById(R.id.zip_detail_label);
+
         mCallButton = (Button) rootView.findViewById(R.id.call_button);
         mEmailButton = (Button) rootView.findViewById(R.id.email_button);
         mMapsButton = (Button) rootView.findViewById(R.id.maps_button);
+
+        mNameLabel.setVisibility(View.INVISIBLE);
+        mPhoneLabel.setVisibility(View.INVISIBLE);
+        mEmailLabel.setVisibility(View.INVISIBLE);
+        mStreetLabel.setVisibility(View.INVISIBLE);
+        mCityLabel.setVisibility(View.INVISIBLE);
+        mStateLabel.setVisibility(View.INVISIBLE);
+        mZipLabel.setVisibility(View.INVISIBLE);
+        mCallButton.setVisibility(View.INVISIBLE);
+        mEmailButton.setVisibility(View.INVISIBLE);
+        mMapsButton.setVisibility(View.INVISIBLE);
 
         return rootView;
     }
@@ -177,6 +204,18 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if (!data.moveToFirst()) {
             return;
         }
+
+        mNameLabel.setVisibility(View.VISIBLE);
+        mPhoneLabel.setVisibility(View.VISIBLE);
+        mEmailLabel.setVisibility(View.VISIBLE);
+        mStreetLabel.setVisibility(View.VISIBLE);
+        mCityLabel.setVisibility(View.VISIBLE);
+        mStateLabel.setVisibility(View.VISIBLE);
+        mZipLabel.setVisibility(View.VISIBLE);
+
+        mCallButton.setVisibility(View.VISIBLE);
+        mEmailLabel.setVisibility(View.VISIBLE);
+        mMapsButton.setVisibility(View.VISIBLE);
 
         final String name = data.getString(COL_ADDRESS_NAME);
         mNameTextView.setText(name);
