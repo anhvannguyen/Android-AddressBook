@@ -62,9 +62,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                         int idIndex = mRecycleAdapter.getCursor().getColumnIndex(AddressContract.AddressEntry._ID);
                         long id = mRecycleAdapter.getCursor().getLong(idIndex);
                         Uri addressUri = AddressContract.AddressEntry.buildAddressUri(id);
-//                        Intent intent = new Intent(getActivity(), DetailActivity.class)
-//                                .setData(addressUri);
-//                        startActivity(intent);
                         ((AddressSelectedCallback)getActivity()).onItemSelected(addressUri);
                     }
                 });
