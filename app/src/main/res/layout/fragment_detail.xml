@@ -17,6 +17,7 @@
         app:columnCount="2">
 
         <TextView
+            android:id="@+id/name_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/name_detail_label"
             android:textSize="16dp"
@@ -29,6 +30,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/phone_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/phone_detail_label"
             android:textSize="16dp"
@@ -42,6 +44,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/email_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/email_detail_label"
             android:textSize="16dp"
@@ -55,6 +58,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/street_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/street_detail_label"
             android:textSize="16dp"
@@ -67,6 +71,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/city_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/city_detail_label"
             android:textSize="16dp"
@@ -79,6 +84,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/state_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/state_detail_label"
             android:textSize="16dp"
@@ -91,6 +97,7 @@
             app:layout_columnWeight="3"/>
 
         <TextView
+            android:id="@+id/zip_detail_label"
             android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
             android:text="@string/zip_detail_label"
             android:textSize="16dp"
