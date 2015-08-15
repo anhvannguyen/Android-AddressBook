@@ -214,7 +214,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mZipLabel.setVisibility(View.VISIBLE);
 
         mCallButton.setVisibility(View.VISIBLE);
-        mEmailLabel.setVisibility(View.VISIBLE);
+        mEmailButton.setVisibility(View.VISIBLE);
         mMapsButton.setVisibility(View.VISIBLE);
 
         final String name = data.getString(COL_ADDRESS_NAME);
