@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import me.anhvannguyen.android.addressbook.data.AddressContract;
 
-/**
- * Created by anhvannguyen on 7/29/15.
- */
 public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecyclerAdapter.ViewHolder> {
     private Cursor mCursor;
     private Context mContext;

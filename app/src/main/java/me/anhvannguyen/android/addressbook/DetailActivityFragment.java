@@ -23,9 +23,6 @@ import android.widget.TextView;
 import me.anhvannguyen.android.addressbook.data.AddressContract;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ADDRESS_DETAIL_LOADER = 0;
     public static final String ADDRESS_DETAIL_URI = "ADDRESS_DETAIL_URI";

@@ -22,9 +22,6 @@ import android.view.ViewGroup;
 import me.anhvannguyen.android.addressbook.data.AddressContract;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
     private static final int ADDRESS_LIST_LOADER = 0;
