@@ -28,7 +28,7 @@
     <string name="city_detail_label">City:</string>
     <string name="state_detail_label">State:</string>
     <string name="zip_detail_label">Zip Code:</string>
-    <string name="call_button_label">Call</string>
+    <string name="call_button_label">Dial</string>
     <string name="email_button_label">Email</string>
     <string name="maps_button_label">Direction</string>
     <string name="error_phone_dialer">Cannot Resolve Phone Dialer</string>
