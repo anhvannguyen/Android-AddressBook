@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity implements MainActivityFragm
     }
 
     @Override
-    public void onItemSelected(Uri addressUri) {
+    public void onItemSelected(Uri addressUri, int position) {
         if (mTwoPane) {
             Bundle args = new Bundle();
             args.putParcelable(DetailActivityFragment.ADDRESS_DETAIL_URI, addressUri);
@@ -44,7 +44,8 @@ public class MainActivity extends ActionBarActivity implements MainActivityFragm
                     .commit();
         } else {
             Intent intent = new Intent(this, AddressPagerActivity.class)
-                    .setData(addressUri);
+                    .setData(addressUri)
+                    .putExtra(AddressPagerActivity.ADDRESS_SELECT_POSITION, position);
             startActivity(intent);
         }
     }
