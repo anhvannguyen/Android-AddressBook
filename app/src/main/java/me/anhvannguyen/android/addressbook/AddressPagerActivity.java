@@ -79,6 +79,7 @@ public class AddressPagerActivity extends ActionBarActivity implements LoaderMan
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursor = data;
+        mAddressViewPager.getAdapter().notifyDataSetChanged();
     }
 
     @Override
