@@ -37,6 +37,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.anhvannguyen.android.addressbook.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddressPagerActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.anhvannguyen.android.addressbook.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
