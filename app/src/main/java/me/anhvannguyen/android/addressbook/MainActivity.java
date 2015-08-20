@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements MainActivityFragm
                     .replace(R.id.address_detail_container, fragment)
                     .commit();
         } else {
-            Intent intent = new Intent(this, DetailActivity.class)
+            Intent intent = new Intent(this, AddressPagerActivity.class)
                     .setData(addressUri);
             startActivity(intent);
         }
