@@ -18,10 +18,12 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  * Created by anhvannguyen on 8/18/15.
  */
 public class AddressPagerActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String ADDRESS_SELECT_POSITION = "address_select_position";
     private static final int ADDRESS_DETAIL_LOADER = 0;
 
     private ViewPager mAddressViewPager;
     private Cursor mCursor;
+    private Uri mAddressUri;
 
     private static final String[] ADDRESS_DETAIL_PROJECTION = {
             AddressContract.AddressEntry._ID,
@@ -41,10 +43,10 @@ public class AddressPagerActivity extends ActionBarActivity implements LoaderMan
             @Override
             public Fragment getItem(int position) {
                 mCursor.moveToPosition(position);
-                Uri addressUri = AddressContract.AddressEntry.buildAddressUri(mCursor.getLong(COL_ADDRESS_ID));
+                mAddressUri = AddressContract.AddressEntry.buildAddressUri(mCursor.getLong(COL_ADDRESS_ID));
 
                 Bundle arguments = new Bundle();
-                arguments.putParcelable(DetailActivityFragment.ADDRESS_DETAIL_URI, addressUri);
+                arguments.putParcelable(DetailActivityFragment.ADDRESS_DETAIL_URI, mAddressUri);
 
                 DetailActivityFragment fragment = new DetailActivityFragment();
                 fragment.setArguments(arguments);
@@ -61,7 +63,13 @@ public class AddressPagerActivity extends ActionBarActivity implements LoaderMan
             }
         });
 
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportLoaderManager().restartLoader(ADDRESS_DETAIL_LOADER, null, this);
     }
 
     @Override
@@ -80,6 +88,8 @@ public class AddressPagerActivity extends ActionBarActivity implements LoaderMan
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursor = data;
         mAddressViewPager.getAdapter().notifyDataSetChanged();
+
+        mAddressViewPager.setCurrentItem(getIntent().getIntExtra(ADDRESS_SELECT_POSITION, 0), true);
     }
 
     @Override
