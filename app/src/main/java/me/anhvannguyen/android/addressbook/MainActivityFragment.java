@@ -37,7 +37,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
      * selections.
      */
     public interface AddressSelectedCallback {
-        public void onItemSelected(Uri addressUri);
+        public void onItemSelected(Uri addressUri, int position);
     }
 
 
@@ -59,7 +59,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                         int idIndex = mRecycleAdapter.getCursor().getColumnIndex(AddressContract.AddressEntry._ID);
                         long id = mRecycleAdapter.getCursor().getLong(idIndex);
                         Uri addressUri = AddressContract.AddressEntry.buildAddressUri(id);
-                        ((AddressSelectedCallback)getActivity()).onItemSelected(addressUri);
+                        ((AddressSelectedCallback)getActivity()).onItemSelected(addressUri, mRecycleAdapter.getCursor().getPosition());
                     }
                 });
 
