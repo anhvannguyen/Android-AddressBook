@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import me.anhvannguyen.android.addressbook.data.AddressContract;
 
@@ -26,6 +28,7 @@ import me.anhvannguyen.android.addressbook.data.AddressContract;
  */
 public class AddressEditorActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ADDRESS_DETAIL_LOADER = 0;
+    private static final int REQUEST_CAMERA = 1;
     public static final String ADDRESS_DETAIL_URI = "ADDRESS_EDIT_URI";
 
     private String mIntentString;
@@ -46,6 +49,7 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
     private EditText mStateEditText;
     private EditText mZipEditText;
     private Button mSaveButton;
+    private ImageButton mPhotoButton;
 
     private Uri mUri;
 
@@ -123,6 +127,17 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
         }
 
         mPhoneEditText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        mPhotoButton = (ImageButton) rootView.findViewById(R.id.address_editor_camera_button);
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(cameraIntent, REQUEST_CAMERA);
+                }
+            }
+        });
 
         mNameInputLayout.setErrorEnabled(true);
         mEmailInputLayout.setErrorEnabled(true);
