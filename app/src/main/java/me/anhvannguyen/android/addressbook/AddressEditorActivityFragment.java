@@ -1,8 +1,10 @@
 package me.anhvannguyen.android.addressbook;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import me.anhvannguyen.android.addressbook.data.AddressContract;
 
@@ -50,6 +53,7 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
     private EditText mZipEditText;
     private Button mSaveButton;
     private ImageButton mPhotoButton;
+    private ImageView mImageView;
 
     private Uri mUri;
 
@@ -127,6 +131,8 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
         }
 
         mPhoneEditText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        mImageView = (ImageView) rootView.findViewById(R.id.address_editor_photo_imageview);
 
         mPhotoButton = (ImageButton) rootView.findViewById(R.id.address_editor_camera_button);
         mPhotoButton.setOnClickListener(new View.OnClickListener() {
@@ -256,5 +262,14 @@ public class AddressEditorActivityFragment extends Fragment implements LoaderMan
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
     }
 }
