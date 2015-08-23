@@ -9,7 +9,7 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:background="@android:color/darker_gray"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:cropToPadding="true"/>
     <ImageButton
         android:id="@+id/address_editor_camera_button"
