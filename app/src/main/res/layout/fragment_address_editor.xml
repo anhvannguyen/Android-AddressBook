@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/name_editor_hint"
-                android:inputType="textPersonName"/>
+                android:inputType="textCapWords"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -67,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/street_editor_hint"
-                android:inputType="text"/>
+                android:inputType="textCapWords"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -81,7 +81,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/city_editor_hint"
-                android:inputType="text"/>
+                android:inputType="textCapWords"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/state_editor_hint"
-                android:inputType="text"/>
+                android:inputType="textCapCharacters"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
